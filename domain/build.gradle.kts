@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+//    implementation(project(":data"))
+
     // AndroidX-Core
     implementationAndroidXCore()
     testImplementation("junit:junit:4.13.2")
