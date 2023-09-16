@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
 }
@@ -9,13 +9,10 @@ android {
     compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
-        applicationId = ConfigData.applicationId
         minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
-        versionCode = ConfigData.versionCode
-        versionName = ConfigData.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -34,6 +31,7 @@ android {
 }
 
 dependencies {
+
     // AndroidX-Core
     implementationAndroidXCore()
     testImplementation("junit:junit:4.13.2")
@@ -62,5 +60,4 @@ dependencies {
 
     // Orbit
     implementationOrbit()
-
 }
