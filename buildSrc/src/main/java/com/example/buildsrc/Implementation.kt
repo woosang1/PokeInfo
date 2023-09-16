@@ -43,20 +43,6 @@ fun DependencyHandler.implementationRetrofitOkHttp() {
     add("implementation", Dependencies.Google.gson)
 }
 
-// kakao (sdk)
-fun DependencyHandler.implementationKakaoSdk() {
-    add("implementation", Dependencies.Kakao.users)
-    add("implementation", Dependencies.Kakao.share)
-    add("implementation", Dependencies.Kakao.talk)
-}
-
-// facebook
-fun DependencyHandler.implementationFacebook() {
-    add("implementation", Dependencies.FaceBook.sdk)
-    add("implementation", Dependencies.FaceBook.shimmer)
-    add("implementation", Dependencies.FaceBook.stetho)
-}
-
 // 파이어베이스
 fun DependencyHandler.implementationFirebase() {
     add("implementation", platform(Dependencies.Google.Firebase.bom))
@@ -67,22 +53,6 @@ fun DependencyHandler.implementationFirebase() {
     add("implementation", Dependencies.Google.Firebase.messaging)
     add("implementation", Dependencies.Google.Firebase.dynamicLinks)
     add("implementation", Dependencies.Google.Firebase.perf)
-}
-
-// 플레이 서비스
-fun DependencyHandler.implementationGms() {
-    add("implementation", Dependencies.Google.Gms.base)
-    add("implementation", Dependencies.Google.Gms.auth)
-    add("implementation", Dependencies.Google.installreferrer)
-    add("implementation", Dependencies.Google.Gms.adsIdentifier)
-    add("implementation", Dependencies.Google.core)
-}
-
-// 구글 지도
-fun DependencyHandler.implementationgoogleMap() {
-    add("implementation", Dependencies.Google.Gms.maps)
-    add("implementation", Dependencies.Google.Gms.places)
-    add("implementation", Dependencies.Google.Gms.location)
 }
 
 // glide
@@ -99,11 +69,6 @@ fun DependencyHandler.implementationHilt() {
     add("kapt", Dependencies.Google.Hilt.androidCompiler)
     add("testImplementation", Dependencies.Google.Hilt.androidTesting)
     add("kaptTest", Dependencies.Google.Hilt.androidCompiler)
-}
-
-fun DependencyHandler.implementationExoPlayer() {
-    add("implementation", Dependencies.Google.exoplayerCore)
-    add("kapt", Dependencies.Google.exoPlayUi)
 }
 
 fun DependencyHandler.implementationWindow() {
