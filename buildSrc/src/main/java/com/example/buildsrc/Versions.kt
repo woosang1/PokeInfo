@@ -14,6 +14,6 @@ object Versions {
     const val rxbinding = "4.0.0"
     const val glide = "4.11.0"
     const val window ="1.0.0"
-    const val orbit ="4.3.1"
+    const val orbit ="6.0.0"
 
 }

@@ -95,7 +95,7 @@ object Dependencies {
 
         object Oribit {
             val core = "org.orbit-mvi:orbit-core:${Versions.orbit}"
-            val viewmodel = "org.orbit-mvi:orbit-core:${Versions.orbit}"
+            val viewmodel = "org.orbit-mvi:orbit-viewmodel:${Versions.orbit}"
         }
     }
 
