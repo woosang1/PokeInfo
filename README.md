@@ -1,7 +1,7 @@
 # PokeInfo (포트폴리오)
 
 ## 포켓몬 도감 앱
-- PokeDex 앱 카피본
+- PokeDex 앱 모방
 
 ## 아키텍처
 MVI (오르빗) / Clean-Architecture(멀티모듈)
