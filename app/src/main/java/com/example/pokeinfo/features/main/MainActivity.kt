@@ -1,6 +1,7 @@
 package com.example.pokeinfo.features.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokeinfo.core.base.BaseActivity
@@ -13,22 +14,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
+    override fun initBinding(layoutInflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setBinding()
         setRecyclerView()
-        setObserve()
         getData()
     }
 
-    private fun setBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun setObserver() {
+        super.setObserver()
+        mainViewModel.observe(lifecycleOwner = this, state = ::render, sideEffect = ::handleSideEffect)
     }
 
     private fun setRecyclerView() {
@@ -47,10 +46,6 @@ class MainActivity : BaseActivity() {
                 )
             )
         }
-    }
-
-    private fun setObserve(){
-        mainViewModel.observe(lifecycleOwner = this, state = ::render, sideEffect = ::handleSideEffect)
     }
 
     private fun render(state: MainState) {
