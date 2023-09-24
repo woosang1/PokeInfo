@@ -13,6 +13,6 @@ class GetPokemonInfoUseCase @Inject constructor(
             offset = offset,
             successCallBack = successCallBack,
             failCallBack = failCallBack
-            )
+        )
     }
 }

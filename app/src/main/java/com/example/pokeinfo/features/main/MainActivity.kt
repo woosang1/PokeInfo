@@ -1,6 +1,7 @@
 package com.example.pokeinfo.features.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -48,11 +49,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun render(state: MainState) {
-        when (state) {
-            is MainState.Info -> {
-
+        Log.d("logger" , "render : state ${state.toString()}")
+        when (state.mainInfoState) {
+            is MainInfoState.Info -> {
+                (binding.recyclerView.adapter as? PokemonCardAdapter)?.addData(state.mainInfoState.infoList)
             }
-            is MainState.Empty -> {
+            is MainInfoState.Empty -> {
 
             }
         }

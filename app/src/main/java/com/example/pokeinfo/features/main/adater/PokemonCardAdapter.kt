@@ -1,5 +1,6 @@
 package com.example.pokeinfo.features.main.adater
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,4 +21,15 @@ class PokemonCardAdapter : RecyclerView.Adapter<PokemonCardViewHolder>() {
     override fun onBindViewHolder(holder: PokemonCardViewHolder, position: Int) {
         holder.bindView(model[position])
     }
+
+    fun addData(model : List<PokemonInfo>){
+        Log.d("logger" , "PokemonCardAdapter - addData")
+        Log.d("logger" , "model : ${model.toString()}")
+        this@PokemonCardAdapter.model.run {
+            clear()
+            addAll(model)
+            notifyDataSetChanged()
+        }
+    }
+
 }

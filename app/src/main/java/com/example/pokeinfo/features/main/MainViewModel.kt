@@ -1,5 +1,6 @@
 package com.example.pokeinfo.features.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.GetPokemonInfoUseCase
@@ -18,26 +19,27 @@ class MainViewModel @Inject constructor(
     private val getPokemonInfoUseCase: GetPokemonInfoUseCase,
 ) : ViewModel(), ContainerHost<MainState, MainSideEffect> {
 
-    override val container: Container<MainState, MainSideEffect> = container(MainState.Empty)
+    override val container: Container<MainState, MainSideEffect> = container(MainState(MainInfoState.Empty))
 
     fun getInfoData(limit: Int?, offset: Int?) = intent {
         getPokemonInfoUseCase.getInfo(
             limit = limit,
             offset = offset,
-            successCallBack = {
+            successCallBack = { pokemonInfo ->
+                Log.d("logger" , "getInfoData - successCallBack")
                 viewModelScope.launch {
                     reduce {
-                        state.run { copy(MainState.Info(infoList = it)) }
-                        state
+                        Log.d("logger", "copy(MainState.Info(infoList = it))")
+                        state.copy(mainInfoState = MainInfoState.Info(infoList = pokemonInfo))
                     }
                 }
             },
             failCallBack = {
+                Log.d("logger" , "getInfoData - failCallBack")
                 viewModelScope.launch {
                     postAction(MainSideEffect.ShowToast(it))
                     reduce {
-                        state.run { copy(MainState.Empty) }
-                        state
+                        state.copy(mainInfoState = MainInfoState.Empty)
                     }
                 }
             }

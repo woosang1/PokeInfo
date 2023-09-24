@@ -32,6 +32,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:textColor="@color/white"
+            android:text="@{pokemonInfo.name}"
             setFontStyle="@{FontStyle.MEDIUM.type}"
             tools:text="Titulo" />
 
@@ -43,6 +44,7 @@
             android:layout_alignParentEnd="true"
             android:alpha="0.25"
             android:gravity="top"
+            android:text="@{pokemonInfo.number}"
             setFontStyle="@{FontStyle.BOLD.type}"
             tools:text="#001" />
 
@@ -105,6 +107,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:adjustViewBounds="true"
+            setImageUrl="@{pokemonInfo.image}"
             android:src="@drawable/poke001" />
 
     </RelativeLayout>
