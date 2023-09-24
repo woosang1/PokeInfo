@@ -10,7 +10,7 @@ interface NetworkAPI {
     /**
      * 포켓몬 조회
      */
-    @GET("")
+    @GET("pokemon/")
     fun getPokemonInfo(
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
@@ -19,7 +19,7 @@ interface NetworkAPI {
     /**
      * 포켓몬 상세 정보
      */
-    @GET("ability/")
+    @GET("pokemon/")
     fun getPokemonDetailInfo(
         @Query("id") id: Int?,
         @Query("name") name: String?,

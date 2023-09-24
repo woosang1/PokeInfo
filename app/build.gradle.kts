@@ -64,6 +64,7 @@ dependencies {
     implementationLifecycle()
     implementation(Dependencies.AndroidX.activity)
     implementation(Dependencies.AndroidX.fragment)
+//    implementation(Dependencies.AndroidX.navigationCompose)
 
     // room
     implementationRoom()

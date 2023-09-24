@@ -1,5 +1,6 @@
 package com.example.data.network
 
+import com.example.data.network.interceptor.LogInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -26,6 +27,7 @@ class RetrofitOkHttpClient {
                             return chain.proceed(request);
                         }
                     })
+                    clientBuilder.addInterceptor(LogInterceptor())
                 }.build()
         }
     }

@@ -19,8 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val mainViewModel: MainViewModel by viewModels()
     override fun initBinding(layoutInflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onInitBinding(){
         setRecyclerView()
         getData()
     }
