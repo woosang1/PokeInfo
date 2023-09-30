@@ -21,7 +21,7 @@ class PokemonCardViewHolder(
     fun bindView(pokemonInfo: PokemonInfo){
         binding.pokemonInfo = pokemonInfo
         setView(pokemonInfo)
-        setClickEvent(pokemonInfo.id)
+        setClickEvent(pokemonInfo)
         binding.executePendingBindings()
     }
 
@@ -34,10 +34,10 @@ class PokemonCardViewHolder(
         }
     }
 
-    private fun setClickEvent(id: String){
+    private fun setClickEvent(pokemonInfo: PokemonInfo){
         binding.rootLayout.setOnClickListener {
             Log.d("logger" , "rootLayout 클릭")
-            mainViewModel.startDetailActivity(id)
+            mainViewModel.startDetailActivity(pokemonInfo)
         }
     }
 

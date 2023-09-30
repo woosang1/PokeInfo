@@ -71,7 +71,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             is MainSideEffect.StartDetailActivity -> {
                 Log.d("logger" , "is MainSideEffect.StartDetailActivity -> {")
-                DetailActivity.start(this@MainActivity, mainSideEffect.id)
+                DetailActivity.start(this@MainActivity, mainSideEffect.pokemonInfo)
             }
         }
     }

@@ -70,7 +70,31 @@ fun ArrayList<RpPokemonInfo.RpPokemon2Item>.mapperToPokemonInfo(): List<PokemonI
                     id = result.id ?: "",
                     name = result.name ?: "",
                     image = result.imageurl ?: "",
-                    type = result.typeofpokemon ?: ArrayList<String>().toList()
+                    type = result.typeofpokemon ?: ArrayList<String>().toList(),
+                    abilities = result.abilities ?: ArrayList<String?>().toList(),
+                    attack = result.attack ?: 0,
+                    baseExp = result.baseExp ?: "",
+                    category = result.category ?: "",
+                    cycles = result.cycles ?: "",
+                    defense = result.defense ?: 0,
+                    eggGroups = result.eggGroups ?: "",
+                    evolutions = result.evolutions ?: ArrayList<String?>().toList(),
+                    evolvedfrom = result.evolvedfrom ?: "",
+                    femalePercentage = result.femalePercentage ?: "",
+                    genderless = result.genderless ?: 0,
+                    height = result.height ?: "",
+                    hp = result.hp ?: 0,
+                    malePercentage = result.malePercentage ?: "",
+                    reason = result.reason ?: "",
+                    specialAttack = result.specialAttack ?: 0,
+                    specialDefense = result.specialDefense ?: 0,
+                    speed = result.speed ?: 0,
+                    total = result.total ?: 0,
+                    typeofpokemon = result.typeofpokemon ?: ArrayList<String>().toList(),
+                    weaknesses = result.weaknesses ?: ArrayList<String?>().toList(),
+                    weight = result.weight ?: "",
+                    xdescription = result.xdescription ?: "",
+                    ydescription = result.ydescription ?: ""
                 )
             )
         }

@@ -3,6 +3,7 @@ package com.example.pokeinfo.features.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.model.PokemonInfo
 import com.example.domain.usecase.GetPokemonInfoUseCase
 import com.example.pokeinfo.features.main.common.MainInfoState
 import com.example.pokeinfo.features.main.common.MainSideEffect
@@ -49,9 +50,8 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    fun startDetailActivity(id: String){
-        Log.d("logger" , "vm - startDetailActivity ${id}")
-        postAction(MainSideEffect.StartDetailActivity(id))
+    fun startDetailActivity(pokemonInfo: PokemonInfo){
+        postAction(MainSideEffect.StartDetailActivity(pokemonInfo))
     }
 
 

@@ -13,7 +13,7 @@ fun setImageUrl(imageView: ImageView, url: String?) {
 }
 
 @BindingAdapter("setBackgroundByType")
-fun setBackgroundByType(view: ImageView, typeList: List<String>?) {
+fun setBackgroundByType(view: View, typeList: List<String>?) {
     typeList?.let {
         val color = PokemonColorUtil(view.context).getPokemonColor(typeList)
         view.setBackgroundColor(color)
