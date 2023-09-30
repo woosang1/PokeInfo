@@ -1,4 +1,4 @@
-package com.example.pokeinfo.features.main
+package com.example.pokeinfo.features.main.common
 
 import com.example.domain.model.PokemonInfo
 

@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.GetPokemonInfoUseCase
+import com.example.pokeinfo.features.main.common.MainInfoState
+import com.example.pokeinfo.features.main.common.MainSideEffect
+import com.example.pokeinfo.features.main.common.MainState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.Container
@@ -45,6 +48,12 @@ class MainViewModel @Inject constructor(
             }
         )
     }
+
+    fun startDetailActivity(id: String){
+        Log.d("logger" , "vm - startDetailActivity ${id}")
+        postAction(MainSideEffect.StartDetailActivity(id))
+    }
+
 
     private fun postAction(sideEffect: MainSideEffect) = intent {
         viewModelScope.launch {

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.example.pokeinfo.features.main.MainState
 
 open abstract class BaseActivity<VDB : ViewDataBinding> : AppCompatActivity(){
 

@@ -6,14 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.databinding.LayoutPokemonCardBinding
+import com.example.pokeinfo.features.main.MainViewModel
 import com.example.pokeinfo.features.main.viewHolder.PokemonCardViewHolder
 
-class PokemonCardAdapter : RecyclerView.Adapter<PokemonCardViewHolder>() {
+class PokemonCardAdapter(private val mainViewModel: MainViewModel) : RecyclerView.Adapter<PokemonCardViewHolder>() {
 
     private val model : ArrayList<PokemonInfo> = ArrayList<PokemonInfo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonCardViewHolder {
-        return PokemonCardViewHolder(binding = LayoutPokemonCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return PokemonCardViewHolder(
+            binding = LayoutPokemonCardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            mainViewModel = mainViewModel
+        )
     }
 
     override fun getItemCount(): Int = model.size

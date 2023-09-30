@@ -1,6 +1,7 @@
 package com.example.pokeinfo.features.main.viewHolder
 
 import android.graphics.Outline
+import android.util.Log
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
@@ -9,20 +10,34 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.databinding.LayoutPokemonCardBinding
+import com.example.pokeinfo.features.main.MainViewModel
 import com.example.pokeinfo.utils.dpToPixel
 
 class PokemonCardViewHolder(
-    val binding: LayoutPokemonCardBinding
+    private val binding: LayoutPokemonCardBinding,
+    private val mainViewModel: MainViewModel
 ) : ViewHolder(binding.root) {
 
     fun bindView(pokemonInfo: PokemonInfo){
+        binding.pokemonInfo = pokemonInfo
+        setView(pokemonInfo)
+        setClickEvent(pokemonInfo.id)
+        binding.executePendingBindings()
+    }
+
+    private fun setView(pokemonInfo: PokemonInfo){
         with(binding){
-            this.pokemonInfo = pokemonInfo
             setRoundView(this.bgLayout)
             setTextViewByType(textView = this.textViewType3, type = pokemonInfo.type.getOrNull(0))
             setTextViewByType(textView = this.textViewType2, type = pokemonInfo.type.getOrNull(1))
             setTextViewByType(textView = this.textViewType1, type = pokemonInfo.type.getOrNull(2))
-            this.executePendingBindings()
+        }
+    }
+
+    private fun setClickEvent(id: String){
+        binding.rootLayout.setOnClickListener {
+            Log.d("logger" , "rootLayout 클릭")
+            mainViewModel.startDetailActivity(id)
         }
     }
 

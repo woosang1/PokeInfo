@@ -1,12 +1,16 @@
-package com.example.pokeinfo.features.main
+package com.example.pokeinfo.features.main.screen
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.databinding.ActivityMainBinding
+import com.example.pokeinfo.features.detail.DetailActivity
+import com.example.pokeinfo.features.main.common.MainInfoState
+import com.example.pokeinfo.features.main.common.MainSideEffect
+import com.example.pokeinfo.features.main.common.MainState
+import com.example.pokeinfo.features.main.MainViewModel
 import com.example.pokeinfo.features.main.adater.PokemonCardAdapter
 import com.example.pokeinfo.utils.decoration.ItemGridDecorator
 import com.example.pokeinfo.utils.dpToPixel
@@ -32,7 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun setRecyclerView() {
         binding.recyclerView.apply {
-            adapter = PokemonCardAdapter()
+            adapter = PokemonCardAdapter(mainViewModel)
             layoutManager = GridLayoutManager(context, 2)
             addItemDecoration(
                 ItemGridDecorator(
@@ -64,6 +68,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         when(mainSideEffect){
             is MainSideEffect.ShowToast -> {
                 showToast(mainSideEffect.message)
+            }
+            is MainSideEffect.StartDetailActivity -> {
+                Log.d("logger" , "is MainSideEffect.StartDetailActivity -> {")
+                DetailActivity.start(this@MainActivity, mainSideEffect.id)
             }
         }
     }
