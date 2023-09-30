@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import com.example.pokeinfo.R
 import java.util.Locale
 
-class PokemonColorUtil(var context: Context) {
+class PokemonColorUtil(private var context: Context) {
 
     @ColorInt
     fun getPokemonColor(typeOfPokemon: List<String>?): Int {

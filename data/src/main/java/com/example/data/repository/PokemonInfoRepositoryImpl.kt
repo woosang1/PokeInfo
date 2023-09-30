@@ -1,18 +1,21 @@
 package com.example.data.repository
 
-import com.example.domain.model.PokemonInfo
-import com.example.data.network.NetworkManager
+import com.example.data.datasource.PokemonInfoRemoteDataSource
 import com.example.data.model.rp.RpPokemonInfo
+import com.example.domain.model.PokemonInfo
 import com.example.data.model.rp.mapperToPokemonInfo
-import com.example.domain.repository.GetPokemonInfoRepository
+import com.example.domain.repository.PokemonInfoRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GetPokemonInfoRepositoryImpl @Inject constructor(
-    private val networkManager: NetworkManager
-) : GetPokemonInfoRepository {
+class PokemonInfoRepositoryImpl @Inject constructor(
+
+    private val remoteDataSource: PokemonInfoRemoteDataSource,
+    private val localDataSource: PokemonInfoRemoteDataSource
+
+) : PokemonInfoRepository {
 
     override fun getInfo(
         limit: Int?,
@@ -20,7 +23,7 @@ class GetPokemonInfoRepositoryImpl @Inject constructor(
         successCallBack: (List<PokemonInfo>) -> Unit,
         failCallBack: (String) -> Unit
     ) {
-        networkManager.getPokemonInfo(limit = limit, offset = offset).subscribeOn(Schedulers.io())
+        remoteDataSource.getInfo().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<RpPokemonInfo>() {
                 override fun onSuccess(result: RpPokemonInfo) {

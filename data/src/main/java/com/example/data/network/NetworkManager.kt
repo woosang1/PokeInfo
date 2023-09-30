@@ -8,13 +8,7 @@ import javax.inject.Provider
 class NetworkManager @Inject constructor(
     private val retrofitClient: Provider<RetrofitClient>
 ) {
-    fun getPokemonInfo(
-        limit: Int?,
-        offset: Int?
-    ): Single<RpPokemonInfo> = retrofitClient.get().getVersionRetrofit(NetworkAPI::class.java).getPokemonInfo(
-        limit = limit,
-        offset = offset
-    )
+    fun getPokemonInfo(): Single<RpPokemonInfo> = retrofitClient.get().getRetrofitByGistGithubUrl(NetworkAPI::class.java).getPokemonInfo()
 
 }
 

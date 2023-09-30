@@ -1,6 +1,6 @@
 package com.example.pokeinfo.di
 
-import com.example.data.repository.GetPokemonInfoRepositoryImpl
+import com.example.data.repository.PokemonInfoRepositoryImpl
 import com.example.domain.usecase.GetPokemonInfoUseCase
 import dagger.Module
 import dagger.Provides
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 object UseCaseModule {
 
     @Provides
-    fun provideGetPokemonInfoUseCase(repository: GetPokemonInfoRepositoryImpl) = GetPokemonInfoUseCase(repository)
+    fun provideGetPokemonInfoUseCase(repository: PokemonInfoRepositoryImpl) = GetPokemonInfoUseCase(repository)
 
 }
