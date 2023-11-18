@@ -1,4 +1,4 @@
-package com.example.pokeinfo.features.main.adater
+package com.example.pokeinfo.features.main.screen.adater
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.databinding.LayoutPokemonCardBinding
-import com.example.pokeinfo.features.main.MainViewModel
-import com.example.pokeinfo.features.main.viewHolder.PokemonCardViewHolder
+import com.example.pokeinfo.features.main.viewModel.MainViewModel
+import com.example.pokeinfo.features.main.screen.viewHolder.PokemonCardViewHolder
 
 class PokemonCardAdapter(private val mainViewModel: MainViewModel) : RecyclerView.Adapter<PokemonCardViewHolder>() {
 

@@ -3,6 +3,9 @@ package com.example.pokeinfo.features.detail.common
 import androidx.fragment.app.Fragment
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.features.detail.about.AboutFragment
+import com.example.pokeinfo.features.detail.evolution.EvolutionFragment
+import com.example.pokeinfo.features.detail.moves.MoviesFragment
+import com.example.pokeinfo.features.detail.state.StateFragment
 
 sealed class Page {
     abstract val pokemonInfo: PokemonInfo
@@ -18,18 +21,18 @@ sealed class Page {
     data class Stats(
         override val pokemonInfo: PokemonInfo,
         override val title : String = "Base Stats",
-        override val fragment : Fragment = AboutFragment.newInstance(pokemonInfo)
+        override val fragment : Fragment = StateFragment.newInstance(pokemonInfo)
     ) : Page()
 
     data class Evolution(
         override val pokemonInfo: PokemonInfo,
         override val title : String = "Evolution",
-        override val fragment : Fragment = AboutFragment.newInstance(pokemonInfo)
+        override val fragment : Fragment = EvolutionFragment.newInstance(pokemonInfo)
     ) : Page()
 
     data class Movies(
         override val pokemonInfo: PokemonInfo,
         override val title : String = "Movies",
-        override val fragment : Fragment = AboutFragment.newInstance(pokemonInfo)
+        override val fragment : Fragment = MoviesFragment.newInstance(pokemonInfo)
     ) : Page()
 }

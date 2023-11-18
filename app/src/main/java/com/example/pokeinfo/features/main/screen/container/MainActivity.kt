@@ -1,4 +1,4 @@
-package com.example.pokeinfo.features.main.screen
+package com.example.pokeinfo.features.main.screen.container
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import com.example.pokeinfo.features.detail.screen.container.DetailActivity
 import com.example.pokeinfo.features.main.common.MainInfoState
 import com.example.pokeinfo.features.main.common.MainSideEffect
 import com.example.pokeinfo.features.main.common.MainState
-import com.example.pokeinfo.features.main.screen.adater.PokemonCardAdapter
 import com.example.pokeinfo.features.main.viewModel.MainViewModel
+import com.example.pokeinfo.features.main.screen.adater.PokemonCardAdapter
 import com.example.pokeinfo.utils.decoration.ItemGridDecorator
 import com.example.pokeinfo.utils.dpToPixel
 import com.example.pokeinfo.utils.showToast

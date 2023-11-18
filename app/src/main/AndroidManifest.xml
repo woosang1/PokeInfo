@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".features.detail.DetailActivity"
+            android:name=".features.detail.screen.container.DetailActivity"
             android:exported="true">
         </activity>
 

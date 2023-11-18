@@ -1,4 +1,4 @@
-package com.example.pokeinfo.features.main.viewHolder
+package com.example.pokeinfo.features.main.screen.viewHolder
 
 import android.graphics.Outline
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.databinding.LayoutPokemonCardBinding
-import com.example.pokeinfo.features.main.MainViewModel
+import com.example.pokeinfo.features.main.viewModel.MainViewModel
 import com.example.pokeinfo.utils.dpToPixel
 
 class PokemonCardViewHolder(

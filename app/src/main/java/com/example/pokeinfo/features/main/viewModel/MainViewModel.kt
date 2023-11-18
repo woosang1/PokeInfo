@@ -1,4 +1,4 @@
-package com.example.pokeinfo.features.main
+package com.example.pokeinfo.features.main.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
