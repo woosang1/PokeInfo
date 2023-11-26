@@ -1,4 +1,4 @@
-# PokeInfo (포트폴리오)
+# PokeInfo
 
 ## 포켓몬 도감 앱
 - PokeDex 앱 클론
