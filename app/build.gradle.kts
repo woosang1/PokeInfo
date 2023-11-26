@@ -77,5 +77,6 @@ dependencies {
 
     // window
     implementationWindow()
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("nb_base-1.0.7.aar"))))
 
 }

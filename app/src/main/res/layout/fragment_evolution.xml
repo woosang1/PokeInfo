@@ -6,15 +6,14 @@
     <data>
 
     </data>
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:background="@color/blue"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </layout>
 

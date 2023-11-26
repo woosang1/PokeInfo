@@ -1,38 +1,39 @@
-package com.example.pokeinfo.features.detail.about
+package com.example.pokeinfo.features.detail.screen.section.about
 
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.core.base.BaseFragment
 import com.example.pokeinfo.databinding.FragmentAboutBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @AndroidEntryPoint
 class AboutFragment : BaseFragment<FragmentAboutBinding>() {
 
     companion object {
         const val POKE_INFO_KEY: String = "pokeInfo"
 
-        @JvmStatic
-        fun newInstance(pokemonInfo: PokemonInfo?) = AboutFragment().apply {
+        fun newInstance(pokemonInfo: PokemonInfo?) : AboutFragment = AboutFragment().apply {
             Log.d("logger", "AboutFragment - newInstance : ${pokemonInfo.toString()}")
-            arguments = Bundle().apply { putSerializable(POKE_INFO_KEY, pokemonInfo) }
+//            arguments = Bundle().apply { putSerializable(POKE_INFO_KEY, pokemonInfo) }
         }
     }
 
     //    private val dashboardViewModel: DashboardViewModel by viewModel()
     private val pokeInfo: PokemonInfo? by lazy { arguments?.getSerializable(POKE_INFO_KEY) as PokemonInfo? }
 
-    override fun initBinding(layoutInflater: LayoutInflater): FragmentAboutBinding =
-        FragmentAboutBinding.inflate(layoutInflater)
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentAboutBinding { return FragmentAboutBinding.inflate(inflater) }
 
     override fun onInitBinding() {
-        super.onInitBinding()
         Log.d("logger", "AboutFragment - onCreate")
         Log.d("logger", "pokeInfo : ${pokeInfo.toString()}")
 
@@ -48,6 +49,9 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
                 executePendingBindings()
             }
         }
+    }
+
+    override fun setObserver() {
     }
 }
 

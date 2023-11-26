@@ -2,10 +2,10 @@ package com.example.pokeinfo.features.detail.common
 
 import androidx.fragment.app.Fragment
 import com.example.domain.model.PokemonInfo
-import com.example.pokeinfo.features.detail.about.AboutFragment
-import com.example.pokeinfo.features.detail.evolution.EvolutionFragment
-import com.example.pokeinfo.features.detail.moves.MoviesFragment
-import com.example.pokeinfo.features.detail.state.StateFragment
+import com.example.pokeinfo.features.detail.screen.section.about.AboutFragment
+import com.example.pokeinfo.features.detail.screen.section.evolution.EvolutionFragment
+import com.example.pokeinfo.features.detail.screen.section.moves.MoviesFragment
+import com.example.pokeinfo.features.detail.screen.section.state.StateFragment
 
 sealed class Page {
     abstract val pokemonInfo: PokemonInfo

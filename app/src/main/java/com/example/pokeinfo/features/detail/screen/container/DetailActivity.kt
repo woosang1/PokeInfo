@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.databinding.ActivityDetailBinding
@@ -18,7 +19,6 @@ import com.example.pokeinfo.utils.intentSerializable
 import com.example.pokeinfo.utils.setBackgroundByType
 import com.example.pokeinfo.utils.setImageUrl
 import com.example.pokeinfo.utils.showToast
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
@@ -99,7 +99,11 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
     }
 
     private fun setViewPager(){
+        Log.i("logger", "setViewPager ㅎㅗ출.")
+        Log.i("logger", "detailViewModel.pages : ${detailViewModel.pages.toString()}")
         binding.viewPager.apply {
+            offscreenPageLimit = 4
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
             adapter = ViewPagerAdapter(
                 fragmentManager = supportFragmentManager,
                 lifecycle = lifecycle,
@@ -110,26 +114,27 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
     private fun setTabLayout(){
         //ViewPager, TabLayout 연결
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            Log.e("YMC", "ViewPager position: ${position}")
             tab.text = detailViewModel.pages[position].title
-            // TODO: 여기작업하기. 
+            // TODO: 여기작업하기.
         }.attach()
 
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                tab?.let {
-                    val position = it.position
-                }
-            }
+        (binding.viewPager.adapter as? ViewPagerAdapter)?.notifyDataSetChanged()
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                // 탭이 선택 해제됐을 때의 동작
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                // 이미 선택된 탭이 다시 선택됐을 때의 동작
-            }
-        })
+//        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab?) {
+//                tab?.let {
+//                    val position = it.position
+//                }
+//            }
+//
+//            override fun onTabUnselected(tab: TabLayout.Tab?) {
+//                // 탭이 선택 해제됐을 때의 동작
+//            }
+//
+//            override fun onTabReselected(tab: TabLayout.Tab?) {
+//                // 이미 선택된 탭이 다시 선택됐을 때의 동작
+//            }
+//        })
     }
 
 }

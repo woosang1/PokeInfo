@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:elevation="0dp"
-            android:fitsSystemWindows="false"
-            tools:background="@color/lightTeal">
+            tools:background="@color/lightTeal"
+            android:visibility="gone">
 
             <!--    툴바    -->
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -133,13 +133,12 @@
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/rounded_top_border"
+                    android:layout_height="60dp"
                     app:tabGravity="fill"
                     app:tabMode="fixed"
                     app:tabSelectedTextColor="@color/red"
-                    app:tabTextColor="@color/black">
+                    app:tabTextColor="@color/black"
+                    android:background="@drawable/rounded_top_border">
                 </com.google.android.material.tabs.TabLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -147,16 +146,19 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-<!--            android:fillViewport="true"-->
+            android:layout_height="match_parent">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 </layout>
+
+
+

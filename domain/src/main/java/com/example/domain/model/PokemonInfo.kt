@@ -32,4 +32,4 @@ data class PokemonInfo(
     val weight: String,
     val xdescription: String,
     val ydescription: String
-    ): Serializable
+): Serializable
