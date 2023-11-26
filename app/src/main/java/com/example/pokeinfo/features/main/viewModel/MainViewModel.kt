@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.PokemonInfo
 import com.example.domain.usecase.GetPokemonInfoUseCase
+import com.example.pokeinfo.core.base.BaseViewModel
 import com.example.pokeinfo.features.main.common.MainInfoState
 import com.example.pokeinfo.features.main.common.MainSideEffect
 import com.example.pokeinfo.features.main.common.MainState
@@ -21,7 +22,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getPokemonInfoUseCase: GetPokemonInfoUseCase,
-) : ViewModel(), ContainerHost<MainState, MainSideEffect> {
+) : BaseViewModel(), ContainerHost<MainState, MainSideEffect> {
 
     override val container: Container<MainState, MainSideEffect> = container(MainState(MainInfoState.Empty))
 
@@ -30,16 +31,14 @@ class MainViewModel @Inject constructor(
             limit = limit,
             offset = offset,
             successCallBack = { pokemonInfo ->
-                Log.d("logger" , "getInfoData - successCallBack")
+                Log.i("logger" , " ${pokemonInfo.toString()}")
                 viewModelScope.launch {
                     reduce {
-                        Log.d("logger", "copy(MainState.Info(infoList = it))")
                         state.copy(mainInfoState = MainInfoState.Info(infoList = pokemonInfo))
                     }
                 }
             },
             failCallBack = {
-                Log.d("logger" , "getInfoData - failCallBack")
                 viewModelScope.launch {
                     postAction(MainSideEffect.ShowToast(it))
                     reduce {
@@ -53,7 +52,6 @@ class MainViewModel @Inject constructor(
     fun startDetailActivity(pokemonInfo: PokemonInfo){
         postAction(MainSideEffect.StartDetailActivity(pokemonInfo))
     }
-
 
     private fun postAction(sideEffect: MainSideEffect) = intent {
         viewModelScope.launch {

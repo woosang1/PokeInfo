@@ -16,7 +16,7 @@
         android:theme="@style/Theme.PokeInfo"
         tools:targetApi="31">
         <activity
-            android:name=".features.main.screen.MainActivity"
+            android:name=".features.main.screen.container.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.core.base.BaseFragment
 import com.example.pokeinfo.databinding.FragmentMoveBinding
+import com.example.pokeinfo.features.detail.common.POKE_INFO_KEY
 import com.example.pokeinfo.features.detail.screen.section.about.AboutFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,16 +18,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MoviesFragment : BaseFragment<FragmentMoveBinding>() {
 
     companion object {
-        private const val POKE_INFO_KEY: String = "pokeInfo"
-
         fun newInstance(pokemonInfo: PokemonInfo?) : MoviesFragment = MoviesFragment().apply {
             Log.d("logger" , "MoviesFragment - newInstance : ${pokemonInfo.toString()}")
-//            arguments = Bundle().apply { putSerializable(POKE_INFO_KEY, pokemonInfo) }
+            arguments = Bundle().apply { putSerializable(POKE_INFO_KEY, pokemonInfo) }
         }
     }
 
-//    private val dashboardViewModel: DashboardViewModel by viewModel()
-//    private val pokeInfo: PokemonInfo? by lazy { arguments?.getSerializable(AboutFragment.POKE_INFO_KEY) as PokemonInfo? }
+    private val pokeInfo: PokemonInfo? by lazy { arguments?.getSerializable(POKE_INFO_KEY) as PokemonInfo? }
     override fun initBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,

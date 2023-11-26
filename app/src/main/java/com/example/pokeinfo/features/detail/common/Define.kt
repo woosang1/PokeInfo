@@ -7,6 +7,8 @@ import com.example.pokeinfo.features.detail.screen.section.evolution.EvolutionFr
 import com.example.pokeinfo.features.detail.screen.section.moves.MoviesFragment
 import com.example.pokeinfo.features.detail.screen.section.state.StateFragment
 
+const val POKE_INFO_KEY: String = "pokeInfo"
+
 sealed class Page {
     abstract val pokemonInfo: PokemonInfo
     abstract val title: String

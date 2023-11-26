@@ -1,5 +1,6 @@
 package com.example.data.model.rp
 
+import android.util.Log
 import com.example.domain.model.PokemonInfo
 import com.google.gson.annotations.SerializedName
 
@@ -78,7 +79,7 @@ fun ArrayList<RpPokemonInfo.RpPokemon2Item>.mapperToPokemonInfo(): List<PokemonI
                     cycles = result.cycles ?: "",
                     defense = result.defense ?: 0,
                     eggGroups = result.eggGroups ?: "",
-                    evolutions = result.evolutions ?: ArrayList<String?>().toList(),
+                    evolutions = getPokemonByEvolutionId(result.evolutions),
                     evolvedfrom = result.evolvedfrom ?: "",
                     femalePercentage = result.femalePercentage ?: "",
                     genderless = result.genderless ?: 0,
@@ -99,4 +100,47 @@ fun ArrayList<RpPokemonInfo.RpPokemon2Item>.mapperToPokemonInfo(): List<PokemonI
             )
         }
     }
+}
+
+fun ArrayList<RpPokemonInfo.RpPokemon2Item>.getPokemonByEvolutionId(idList : List<String?>?) : List<PokemonInfo> {
+    Log.i("logger" , "getPokemonByEvolutionId 호출.")
+    val evolutions = ArrayList<PokemonInfo>()
+    idList?.forEachIndexed { index, id ->
+        val evolutionPokemon = this.firstOrNull { it.id == id }
+        Log.i("logger" , "evolutionPokemon : ${evolutionPokemon.toString()}")
+        evolutionPokemon?.let { it ->
+            evolutions.add(PokemonInfo(
+                id = it.id ?: "",
+                name = it.name ?: "",
+                image = it.imageurl ?: "",
+                type = it.typeofpokemon ?: ArrayList<String>().toList(),
+                abilities = it.abilities ?: ArrayList<String?>().toList(),
+                attack = it.attack ?: 0,
+                baseExp = it.baseExp ?: "",
+                category = it.category ?: "",
+                cycles = it.cycles ?: "",
+                defense = it.defense ?: 0,
+                eggGroups = it.eggGroups ?: "",
+                evolutions = null,
+                evolvedfrom = it.evolvedfrom ?: "",
+                femalePercentage = it.femalePercentage ?: "",
+                genderless = it.genderless ?: 0,
+                height = it.height ?: "",
+                hp = it.hp ?: 0,
+                malePercentage = it.malePercentage ?: "",
+                reason = it.reason ?: "",
+                specialAttack = it.specialAttack ?: 0,
+                specialDefense = it.specialDefense ?: 0,
+                speed = it.speed ?: 0,
+                total = it.total ?: 0,
+                typeofpokemon = it.typeofpokemon ?: ArrayList<String>().toList(),
+                weaknesses = it.weaknesses ?: ArrayList<String?>().toList(),
+                weight = it.weight ?: "",
+                xdescription = it.xdescription ?: "",
+                ydescription = it.ydescription ?: ""
+            ))
+        }
+    }
+    Log.i("logger" , "evolutions.toList()")
+    return evolutions.toList()
 }

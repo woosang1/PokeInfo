@@ -70,7 +70,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 showToast(mainSideEffect.message)
             }
             is MainSideEffect.StartDetailActivity -> {
-                Log.d("logger" , "is MainSideEffect.StartDetailActivity -> {")
                 DetailActivity.start(this@MainActivity, mainSideEffect.pokemonInfo)
             }
         }

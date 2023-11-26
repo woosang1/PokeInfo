@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.viewpager2.widget.ViewPager2
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.core.base.BaseFragment
 import com.example.pokeinfo.databinding.FragmentAboutBinding
 import com.example.pokeinfo.databinding.FragmentEvolutionBinding
+import com.example.pokeinfo.features.detail.common.POKE_INFO_KEY
 import com.example.pokeinfo.features.detail.screen.section.about.AboutFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,16 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class EvolutionFragment : BaseFragment<FragmentEvolutionBinding>() {
 
     companion object {
-        private const val POKE_INFO_KEY: String = "pokeInfo"
-
         fun newInstance(pokemonInfo: PokemonInfo?) : EvolutionFragment = EvolutionFragment().apply {
-            Log.d("logger" , "EvolutionFragment - newInstance : ${pokemonInfo.toString()}")
-//            arguments = Bundle().apply { putSerializable(POKE_INFO_KEY, pokemonInfo) }
+            arguments = Bundle().apply { putSerializable(POKE_INFO_KEY, pokemonInfo) }
         }
     }
 
-//    private val dashboardViewModel: DashboardViewModel by viewModel()
-    private val pokeInfo: PokemonInfo? by lazy { arguments?.getSerializable(AboutFragment.POKE_INFO_KEY) as PokemonInfo? }
+    private val pokeInfo: PokemonInfo? by lazy { arguments?.getSerializable(POKE_INFO_KEY) as PokemonInfo? }
 
     override fun initBinding(
         inflater: LayoutInflater,
@@ -38,12 +36,30 @@ class EvolutionFragment : BaseFragment<FragmentEvolutionBinding>() {
     }
 
     override fun onInitBinding() {
-        pokeInfo?.let { pokeInfo ->
-            with(binding){
-                executePendingBindings()
-            }
-        }
+        setRecyclerView()
+//        setList()
     }
+
+    private fun setRecyclerView(){
+        // TODO: 여기 안나오는 이슈 존재. 
+        binding.recyclerView.apply { adapter = EvolutionAdapter(list = pokeInfo?.evolutions) }
+    }
+
+//    private fun setList(){
+//        Log.i("logger" , "fragment - setList")
+//        pokeInfo?.let { pokeInfo ->
+//            (binding.recyclerView.adapter as? EvolutionAdapter)?.apply {
+////                model.clear()
+//                Log.i("logger" , "pokeInfo.evolutions : ${pokeInfo.evolutions}")
+//                pokeInfo.evolutions?.let {
+//                    Log.i("logger" , "addAll!!")
+//                    model.addAll(it)
+//                }
+//                notifyDataSetChanged()
+//            }
+//        }
+//    }
+
 
     override fun setObserver() {
     }

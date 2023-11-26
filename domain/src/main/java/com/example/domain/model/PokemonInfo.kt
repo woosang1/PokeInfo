@@ -15,7 +15,7 @@ data class PokemonInfo(
     val cycles: String,
     val defense: Int,
     val eggGroups: String,
-    val evolutions: List<String?>,
+    val evolutions: List<PokemonInfo>?,
     val evolvedfrom: String,
     val femalePercentage: String,
     val genderless: Int,
