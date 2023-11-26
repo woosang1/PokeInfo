@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+        <import type="com.example.pokeinfo.utils.FontStyle" />
 
     </data>
     <androidx.core.widget.NestedScrollView
@@ -96,8 +98,8 @@
                 android:layout_marginTop="16dp"
                 android:text="Breeding"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                setFontStyle="@{FontStyle.BOLD.type}"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,7 +112,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Gender"
-                    android:textSize="16sp" />
+                    setFontStyle="@{FontStyle.BOOK.type}"
+                    />
 
 
                 <TextView
@@ -144,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    setFontStyle="@{FontStyle.BOOK.type}"
                     tools:text="\u2641 87.5%  \u2640 12.5%" />
 
             </LinearLayout>
@@ -160,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Egg Cycle"
-                    android:textSize="16sp" />
+                    setFontStyle="@{FontStyle.BOOK.type}" />
 
 
                 <TextView
@@ -169,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    setFontStyle="@{FontStyle.BOOK.type}"
                     tools:text="\u2640 87.5%  \u2642 12.5%" />
 
             </LinearLayout>
@@ -180,8 +183,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Location"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                setFontStyle="@{FontStyle.BOLD.type}" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -197,8 +199,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Training"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                setFontStyle="@{FontStyle.BOLD.type}" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -212,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Base EXP"
-                    android:textSize="16sp" />
+                    setFontStyle="@{FontStyle.BOOK.type}" />
 
 
                 <TextView
@@ -221,7 +222,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    setFontStyle="@{FontStyle.BOOK.type}"
                     tools:text="65" />
 
             </LinearLayout>
