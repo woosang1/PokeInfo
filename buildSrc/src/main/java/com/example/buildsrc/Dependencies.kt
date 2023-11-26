@@ -75,6 +75,7 @@ object Dependencies {
 
     object ThirdParty {
         val lottie = "com.airbnb.android:lottie:5.2.0"
+        val speedDial = "com.leinardi.android:speed-dial:3.3.0"
 
         object Reactivex {
             val rxjava = "io.reactivex.rxjava2:rxjava:2.2.19"

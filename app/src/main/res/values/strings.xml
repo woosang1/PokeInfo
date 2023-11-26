@@ -31,4 +31,9 @@
     <string name="dashboard_tab_2">Base Stats</string>
     <string name="dashboard_tab_3">Evolution</string>
     <string name="dashboard_tab_4">Moves</string>
+    <string name="search">Search</string>
+    <string name="all_generations">All Generations</string>
+    <string name="all_types">All Types</string>
+    <string name="favorite_pokemons">Favorite Pokemons</string>
+
 </resources>

@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ChildBottomSheetDialog</item>
+    </style>
+
+    <style name="ChildBottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:background">@drawable/white_topleft24_topright24</item>
+    </style>
+</resources>

@@ -79,3 +79,7 @@ fun DependencyHandler.implementationOrbit() {
     add("implementation", Dependencies.ThirdParty.Oribit.core)
     add("implementation", Dependencies.ThirdParty.Oribit.viewmodel)
 }
+
+fun DependencyHandler.implementationSpeedDial() {
+    add("implementation", Dependencies.ThirdParty.speedDial)
+}

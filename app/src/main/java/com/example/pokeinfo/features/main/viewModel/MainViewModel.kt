@@ -53,6 +53,28 @@ class MainViewModel @Inject constructor(
         postAction(MainSideEffect.StartDetailActivity(pokemonInfo))
     }
 
+    fun showFavoriteBottomSheet(){
+        postAction(MainSideEffect.ShowFavoriteBottomSheet(
+            pokemonInfoList = ArrayList<PokemonInfo>()
+        ))
+    }
+
+    fun showAllTypeBottomSheet(){
+        postAction(MainSideEffect.ShowAllTypeBottomSheet(
+            pokemonInfoList = ArrayList<PokemonInfo>()
+        ))
+    }
+
+    fun showGenerationsBottomSheet(){
+        postAction(MainSideEffect.ShowGenerationsBottomSheet(
+            pokemonInfoList = ArrayList<PokemonInfo>()
+        ))
+    }
+
+    fun showSearchBottomSheet(){
+        postAction(MainSideEffect.ShowSearchBottomSheet)
+    }
+
     private fun postAction(sideEffect: MainSideEffect) = intent {
         viewModelScope.launch {
             postSideEffect(sideEffect = sideEffect)
