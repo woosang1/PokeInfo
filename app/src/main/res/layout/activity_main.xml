@@ -8,17 +8,72 @@
 
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.main.screen.container.MainActivity">
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginTop="-80dp"
+            android:layout_marginEnd="-80dp"
+            android:adjustViewBounds="true"
+            android:alpha="0.10"
+            android:background="@drawable/pokeball"
+            app:tint="@color/white" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="false"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="false"
+                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="bottom|end"
+                    app:elevation="0dp"
+                    app:layout_collapseMode="pin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:overScrollMode="never"
-            android:scrollbars="none"/>
+            android:paddingStart="8dp"
+            android:background="@color/white"
+            android:paddingEnd="8dp"
+            app:layoutManager="GridLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:itemCount="20"
+            tools:spanCount="2" />
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
