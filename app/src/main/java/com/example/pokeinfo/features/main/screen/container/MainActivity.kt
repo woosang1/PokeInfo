@@ -22,7 +22,7 @@ import com.example.pokeinfo.utils.showToast
 import com.leinardi.android.speeddial.SpeedDialView
 import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
-
+import com.example.pokeinfo.utils.checkFolderPhone
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -32,9 +32,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         ActivityMainBinding.inflate(layoutInflater)
 
     override fun onInitBinding() {
-        setRecyclerView()
-        setSpeedDialView()
-        getData()
+        checkFolderPhone()
+    }
+
+    private fun checkFolderPhone() {
+        checkFolderPhone(
+            lifecycleOwner = this,
+            lifecycle = lifecycle,
+            doubleScreenModeCallBack = {
+                // 폴더폰 시,
+                setRecyclerView()
+                setSpeedDialView()
+                getData()
+            },
+            singleScreenModeCallback = {
+                // 일반폰 or 폴더폰(접음)시,
+                setRecyclerView()
+                setSpeedDialView()
+                getData()
+            }
+        )
     }
 
     override fun setObserver() {
