@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import com.example.pokeinfo.core.ui.bottomSheet.layout.AllTypeLayout
 import com.example.pokeinfo.core.ui.bottomSheet.layout.FavoriteLayout
-import com.example.pokeinfo.core.ui.bottomSheet.layout.GenerationsLayout
+import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.GenerationsLayout
 import com.example.pokeinfo.core.ui.bottomSheet.layout.SearchLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
