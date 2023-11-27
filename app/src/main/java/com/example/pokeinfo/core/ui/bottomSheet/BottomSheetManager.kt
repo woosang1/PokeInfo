@@ -59,6 +59,14 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
         dialog.behavior.isDraggable = true
         dialog.behavior.maxHeight = (requireContext().getDeviceHeight() * 0.75).toInt()
         dialog.behavior.peekHeight = (requireContext().getDeviceHeight() * 0.75).toInt()
+
+        when(currentType){
+            BottomSheetType.SEARCH -> {
+                dialog.window?.setDimAmount(0.2f)
+            }
+            else -> { }
+        }
+
         return dialog
     }
 }

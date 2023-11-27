@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.pokeinfo.utils.FontStyle" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray8_radius6">
+
+        <LinearLayout
+            android:id="@+id/rootLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="48dp"
+            android:paddingVertical="12dp"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_search"
+                android:layout_gravity="center" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:hint="ex) Charizard or 001"
+                android:background="@drawable/gray8_transparency_radius8"
+                android:singleLine="true"
+                android:inputType="textNoSuggestions"
+                android:imeOptions="actionSearch"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray_2"
+                android:layout_marginStart="8dp"
+                setFontStyle="@{FontStyle.BOOK.type}" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+</layout>

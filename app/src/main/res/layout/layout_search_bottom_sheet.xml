@@ -9,8 +9,18 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@drawable/white_topleft24_topright24">
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_topleft24_topright24"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp">
+
+        <com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBarLayout
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBarLayout>
+
 
     </FrameLayout>
 
