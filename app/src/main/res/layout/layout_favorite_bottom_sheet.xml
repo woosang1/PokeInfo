@@ -4,13 +4,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <import type="com.example.pokeinfo.utils.FontStyle" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_topleft24_topright24">
+        android:background="@drawable/white_topleft24_topright24"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_top_border"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="32dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/favorite_pokemons"
+                android:textColor="@color/black"
+                setFontStyle="@{FontStyle.BLACK.type}" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -23,7 +47,7 @@
             app:layoutManager="GridLayoutManager"
             tools:spanCount="2" />
 
-    </FrameLayout>
+    </LinearLayout>
 
 </layout>
 
