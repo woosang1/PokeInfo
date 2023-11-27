@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.R
 import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetManager
@@ -61,7 +62,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun handleSideEffect(mainSideEffect: MainSideEffect) {
         when (mainSideEffect) {
             is MainSideEffect.ShowFavoriteBottomSheet -> {
-                val bottomSheet = BottomSheetManager(BottomSheetType.FAVORITE)
+                val bottomSheet = BottomSheetManager(
+                    currentType = BottomSheetType.FAVORITE,
+                    pokemonInfoList = (binding.recyclerView.adapter as? PokemonCardAdapter)?.getModel() ?: ArrayList<PokemonInfo>()
+                )
                 bottomSheet.show(supportFragmentManager, bottomSheet.tag)
             }
 

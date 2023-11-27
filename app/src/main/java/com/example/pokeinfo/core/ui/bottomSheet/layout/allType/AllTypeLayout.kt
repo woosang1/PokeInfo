@@ -1,4 +1,4 @@
-package com.example.pokeinfo.core.ui.bottomSheet.layout
+package com.example.pokeinfo.core.ui.bottomSheet.layout.allType
 
 import android.content.Context
 import android.view.LayoutInflater

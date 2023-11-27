@@ -9,8 +9,19 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/white_topleft24_topright24">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:paddingStart="8dp"
+            android:background="@color/white"
+            android:paddingEnd="8dp"
+            app:layoutManager="GridLayoutManager"
+            tools:spanCount="2" />
 
     </FrameLayout>
 

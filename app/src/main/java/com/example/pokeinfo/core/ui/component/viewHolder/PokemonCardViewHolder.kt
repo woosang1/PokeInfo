@@ -1,4 +1,4 @@
-package com.example.pokeinfo.features.main.screen.viewHolder
+package com.example.pokeinfo.core.ui.component.viewHolder
 
 import android.graphics.Outline
 import android.util.Log
@@ -15,13 +15,12 @@ import com.example.pokeinfo.utils.dpToPixel
 
 class PokemonCardViewHolder(
     private val binding: LayoutPokemonCardBinding,
-    private val mainViewModel: MainViewModel
 ) : ViewHolder(binding.root) {
 
-    fun bindView(pokemonInfo: PokemonInfo){
+    fun bindView(pokemonInfo: PokemonInfo, clickItem: () -> Unit){
         binding.pokemonInfo = pokemonInfo
         setView(pokemonInfo)
-        setClickEvent(pokemonInfo)
+        setClickEvent(clickItem)
         binding.executePendingBindings()
     }
 
@@ -34,10 +33,10 @@ class PokemonCardViewHolder(
         }
     }
 
-    private fun setClickEvent(pokemonInfo: PokemonInfo){
+    private fun setClickEvent(clickItem: () -> Unit){
         binding.rootLayout.setOnClickListener {
             Log.d("logger" , "rootLayout 클릭")
-            mainViewModel.startDetailActivity(pokemonInfo)
+            clickItem.invoke()
         }
     }
 

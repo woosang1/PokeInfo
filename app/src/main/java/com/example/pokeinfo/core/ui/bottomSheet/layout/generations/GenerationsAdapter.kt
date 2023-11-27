@@ -1,14 +1,9 @@
 package com.example.pokeinfo.core.ui.bottomSheet.layout.generations
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.databinding.LayoutGenerationsItemBinding
-import com.example.pokeinfo.databinding.LayoutPokemonCardBinding
-import com.example.pokeinfo.features.main.viewModel.MainViewModel
-import com.example.pokeinfo.features.main.screen.viewHolder.PokemonCardViewHolder
 
 class GenerationsAdapter() : RecyclerView.Adapter<GenerationsItemViewHolder>() {
 
