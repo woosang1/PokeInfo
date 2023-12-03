@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.domain.model.PokemonInfo
+import com.example.pokeinfo.R
 import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.databinding.ActivityDetailBinding
 import com.example.pokeinfo.features.detail.common.DetailSideEffect
@@ -98,6 +99,7 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
             setBackgroundByType(binding.toolbarLayout, pokemonInfo.type)
             binding.imageView.setImageUrl(pokemonInfo.image)
         }
+        setFavorite()
     }
 
     private fun setViewPager(){
@@ -136,8 +138,18 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
 
     private fun setListener(){
         binding.favoriteBtn.setOnClickListener {
-            detailViewModel.postAction(DetailSideEffect.ShowToast("저장되었습니다."))
+            detailViewModel.isLike = !detailViewModel.isLike
+            detailViewModel.postAction(DetailSideEffect.ShowToast(
+                if (detailViewModel.isLike) "저장되었습니다. (좋아요 기능 개발중)"
+                else "취소되었습니다."))
+            setFavorite()
+
         }
+    }
+
+    private fun setFavorite(){
+        if (detailViewModel.isLike) binding.favoriteBtn.setImageResource(R.drawable.favorite_on)
+        else binding.favoriteBtn.setImageResource(com.example.pokeinfo.R.drawable.favorite_off)
     }
 
 }

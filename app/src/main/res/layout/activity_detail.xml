@@ -125,7 +125,7 @@
                             android:id="@+id/favoriteBtn"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:src="@drawable/search"
+                            android:src="@drawable/favorite_off"
                             android:layout_alignParentEnd="true"
                             android:layout_alignBottom="@+id/textViewType1" />
 

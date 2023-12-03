@@ -24,6 +24,8 @@ class DetailViewModel @Inject constructor() : ViewModel(), ContainerHost<DetailS
     var pokemonInfo: PokemonInfo? = null
     var pages = ArrayList<Page>()
 
+    var isLike = false
+
     fun postAction(sideEffect: DetailSideEffect) = intent {
         viewModelScope.launch {
             postSideEffect(sideEffect = sideEffect)
