@@ -73,6 +73,10 @@ object Dependencies {
         val picasso = "com.squareup.picasso:picasso:2.71828"
     }
 
+    object FaceBook {
+        val shimmer = "com.facebook.shimmer:shimmer:0.5.0"
+    }
+
     object ThirdParty {
         val lottie = "com.airbnb.android:lottie:5.2.0"
         val speedDial = "com.leinardi.android:speed-dial:3.3.0"

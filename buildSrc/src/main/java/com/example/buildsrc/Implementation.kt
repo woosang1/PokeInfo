@@ -43,6 +43,11 @@ fun DependencyHandler.implementationRetrofitOkHttp() {
     add("implementation", Dependencies.Google.gson)
 }
 
+// facebook
+fun DependencyHandler.implementationFacebook() {
+    add("implementation", Dependencies.FaceBook.shimmer)
+}
+
 // 파이어베이스
 fun DependencyHandler.implementationFirebase() {
     add("implementation", platform(Dependencies.Google.Firebase.bom))

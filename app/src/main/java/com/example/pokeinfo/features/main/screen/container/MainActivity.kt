@@ -24,6 +24,10 @@ import com.leinardi.android.speeddial.SpeedDialView
 import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
 import com.example.pokeinfo.utils.checkFolderPhone
+import com.example.pokeinfo.utils.startShimmer
+import com.example.pokeinfo.utils.stopShimmer
+import com.example.pokeinfo.utils.stopShimmerLayout
+
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -69,10 +73,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         when (state.mainInfoState) {
             is MainInfoState.Info -> {
                 (binding.recyclerView.adapter as? PokemonCardAdapter)?.addData(state.mainInfoState.infoList)
+                stopShimmerLayout(shimmerLayout = binding.shimmerLayout.getShimmerLayout(), contentLayout = binding.recyclerView)
             }
 
             is MainInfoState.Empty -> {
                 (binding.recyclerView.adapter as? PokemonCardAdapter)?.clear()
+                startShimmer(shimmerLayout = binding.shimmerLayout.getShimmerLayout(), contentLayout = binding.recyclerView)
             }
         }
     }

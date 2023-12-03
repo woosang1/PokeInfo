@@ -59,21 +59,35 @@
                 </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
-
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:paddingStart="8dp"
-            android:background="@color/white"
-            android:paddingEnd="8dp"
-            app:layoutManager="GridLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:itemCount="20"
-            tools:spanCount="2" />
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!--   리스트  -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:paddingHorizontal="8dp"
+                android:background="@color/white"
+                android:visibility="visible" />
+            <!--                app:layouGt_behavior="@string/appbar_scrolling_view_behavior"-->
+
+            <!-- 시머    -->
+            <com.example.pokeinfo.features.main.screen.shimmer.MainShimmer
+                android:id="@+id/shimmerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:visibility="visible">
+
+            </com.example.pokeinfo.features.main.screen.shimmer.MainShimmer>
+
+        </FrameLayout>
 
         <com.leinardi.android.speeddial.SpeedDialView
             android:id="@+id/speedDial"

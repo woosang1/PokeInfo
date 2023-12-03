@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.pokeinfo.utils.FontStyle" />
+
+        <variable
+            name="pokemonInfo"
+            type="com.example.domain.model.PokemonInfo" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="8dp">
+
+        <!--   배경  -->
+        <ImageView
+            android:id="@+id/bgLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color"/>
+
+        <!--  내용    -->
+        <RelativeLayout
+            android:id="@+id/relativeLayoutBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/white"
+                android:text="@{pokemonInfo.name}"
+                setFontStyle="@{FontStyle.MEDIUM.type}"
+                tools:text="Titulo"
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/textViewID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:alpha="0.25"
+                android:gravity="top"
+                android:text="@{pokemonInfo.id}"
+                setFontStyle="@{FontStyle.BOLD.type}"
+                tools:text="#001"
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/textViewType1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textViewType2"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_item_pokemon_span"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/white"
+                setFontStyle="@{FontStyle.BOOK.type}"
+                tools:text="Grass"
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/textViewType2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textViewType3"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_item_pokemon_span"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/white"
+                setFontStyle="@{FontStyle.BOOK.type}"
+                tools:text="Grass"
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/textViewType3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/background_item_pokemon_span"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/white"
+                setFontStyle="@{FontStyle.BOOK.type}"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="-16dp"
+                android:layout_marginBottom="-24dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.25"
+                android:src="@drawable/pokeball"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:adjustViewBounds="true"
+                setImageUrl="@{pokemonInfo.image}"
+                android:src="@drawable/poke001"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</layout>

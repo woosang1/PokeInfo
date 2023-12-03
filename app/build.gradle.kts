@@ -87,6 +87,9 @@ dependencies {
     // speedDial
     implementationSpeedDial()
 
+    // faceBook
+    implementationFacebook()
+
     // base
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("nb_base-1.0.7.aar"))))
     implementation("com.squareup:javapoet:1.13.0") // <-- added this

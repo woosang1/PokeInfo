@@ -28,4 +28,5 @@
 
     <color name="gray_2">#363A3C</color>
     <color name="gray_8">#F2F4F5</color>
+    <color name="shimmer_color">#454A53</color>
 </resources>
