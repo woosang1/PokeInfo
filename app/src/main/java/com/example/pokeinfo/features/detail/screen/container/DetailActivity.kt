@@ -53,6 +53,7 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
         setView()
         setViewPager()
         setTabLayout()
+        setListener()
     }
 
     override fun setObserver() {
@@ -131,6 +132,12 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
                 // 이미 선택된 탭이 다시 선택됐을 때의 동작
             }
         })
+    }
+
+    private fun setListener(){
+        binding.favoriteBtn.setOnClickListener {
+            detailViewModel.postAction(DetailSideEffect.ShowToast("저장되었습니다."))
+        }
     }
 
 }

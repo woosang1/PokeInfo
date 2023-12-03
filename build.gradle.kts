@@ -20,21 +20,10 @@ buildscript {
     }
 }
 
-//allprojects {
-//    repositories {
-//        google()
-//        mavenLocal()
-//        mavenCentral()
-//        flatDir { dirs("libs") }
-//        maven { url = uri("https://jitpack.io") }
-//        maven { url = uri("https://maven.google.com/") }
-//        maven { url = uri("https://sdk-download.airbridge.io/maven") }
-//        maven { url = uri("https://naver.jfrog.io/artifactory/maven/") }
-//        maven { url = uri("https://appboy.github.io/appboy-android-sdk/sdk") }
-//        maven { url = uri("https://devrepo.kakao.com/nexus/content/groups/public/") }
-//    }
-//}
-
-//tasks.register("clean", Delete::class) {
-//    delete(rootProject.buildDir)
-//}
+configurations.all {
+    resolutionStrategy.eachDependency {
+        when {
+            requested.name == "javapoet" -> useVersion("1.13.0")
+        }
+    }
+}
