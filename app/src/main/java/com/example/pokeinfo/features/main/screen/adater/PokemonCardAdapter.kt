@@ -39,8 +39,13 @@ class PokemonCardAdapter(private val mainViewModel: MainViewModel) : RecyclerVie
         }
     }
 
-    fun getModel() : ArrayList<PokemonInfo>{
-        return model
+    fun getModel() : ArrayList<PokemonInfo> = model
+    fun clear() {
+        this@PokemonCardAdapter.model.run {
+            clear()
+            notifyDataSetChanged()
+        }
     }
+
 
 }

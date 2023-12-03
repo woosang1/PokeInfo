@@ -7,18 +7,25 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.pokeinfo.databinding.LayoutSearchBottomSheetBinding
 
-class SearchLayout
-constructor(context: Context, closeCallBack : (() -> Unit)? = null) : LinearLayout(context) {
+class SearchLayout(
+    private val context: Context,
+    private val searchBottomSheetInterface: SearchBottomSheetInterface?
+) : LinearLayout(context) {
 
-    private var binding: LayoutSearchBottomSheetBinding = LayoutSearchBottomSheetBinding.inflate(LayoutInflater.from(context), this, true)
+    private var binding: LayoutSearchBottomSheetBinding =
+        LayoutSearchBottomSheetBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
         binding.searchBar.apply {
             setHint("ex) Charizard or 001")
             // 포커스 변경 시,
             setFocusChangeListener(
-                hasFocusCallback = { },
-                notFocusCallback = { }
+                hasFocusCallback = {
+                    searchBottomSheetInterface?.onFocus()
+                },
+                notFocusCallback = {
+                    searchBottomSheetInterface?.onFocusCleared()
+                }
             )
             // 검색바 클릭 시,
             setClickSearchBarListener { binding.searchBar.focusOn() }
@@ -27,11 +34,15 @@ constructor(context: Context, closeCallBack : (() -> Unit)? = null) : LinearLayo
             // 텍스트 변경 시,
             setTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun afterTextChanged(p0: Editable?) { }
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    searchBottomSheetInterface?.onTextChanged(p0.toString())
+                }
+
+                override fun afterTextChanged(p0: Editable?) {}
             })
             // 엔터 키
             setClickEnterListener {
+                searchBottomSheetInterface?.onEnterKeyPressed()
                 binding.searchBar.focusOff()
             }
         }

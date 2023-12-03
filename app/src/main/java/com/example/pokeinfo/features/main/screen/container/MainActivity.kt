@@ -9,6 +9,7 @@ import com.example.pokeinfo.R
 import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetManager
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetType
+import com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBottomSheetInterface
 import com.example.pokeinfo.databinding.ActivityMainBinding
 import com.example.pokeinfo.features.detail.screen.container.DetailActivity
 import com.example.pokeinfo.features.main.common.MainInfoState
@@ -71,7 +72,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
 
             is MainInfoState.Empty -> {
-
+                (binding.recyclerView.adapter as? PokemonCardAdapter)?.clear()
             }
         }
     }
@@ -97,7 +98,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
 
             is MainSideEffect.ShowSearchBottomSheet -> {
-                val bottomSheet = BottomSheetManager(BottomSheetType.SEARCH)
+                val bottomSheet = BottomSheetManager(
+                    currentType = BottomSheetType.SEARCH,
+                    searchBottomSheetInterface = object : SearchBottomSheetInterface {
+                        override fun onFocus() { }
+                        override fun onFocusCleared() { }
+                        override fun onTextChanged(text: CharSequence?) {
+                            val value = text.toString()
+                            mainViewModel.setEmptyState()
+                            if (value.isNotEmpty()) mainViewModel.getInfoDataWithFilter(value)
+                            else mainViewModel.getInfoData(limit = 0, offset = 0)
+                        }
+                        override fun onEnterKeyPressed() { }
+                    }
+                )
                 bottomSheet.show(supportFragmentManager, bottomSheet.tag)
             }
 

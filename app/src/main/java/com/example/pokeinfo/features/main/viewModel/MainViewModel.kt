@@ -25,13 +25,26 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel(), ContainerHost<MainState, MainSideEffect> {
 
     override val container: Container<MainState, MainSideEffect> = container(MainState(MainInfoState.Empty))
+    private var pokemonInfo: List<PokemonInfo> = emptyList()
 
     fun getInfoData(limit: Int?, offset: Int?) = intent {
+        if (pokemonInfo.isEmpty()) getInfoDataByServer(limit = limit, offset = offset)
+        else {
+            viewModelScope.launch {
+                reduce {
+                    state.copy(mainInfoState = MainInfoState.Info(infoList = pokemonInfo))
+                }
+            }
+        }
+    }
+
+    private fun getInfoDataByServer(limit: Int?, offset: Int?) = intent {
         getPokemonInfoUseCase.getInfo(
             limit = limit,
             offset = offset,
             successCallBack = { pokemonInfo ->
                 Log.i("logger" , " ${pokemonInfo.toString()}")
+                this@MainViewModel.pokemonInfo = pokemonInfo
                 viewModelScope.launch {
                     reduce {
                         state.copy(mainInfoState = MainInfoState.Info(infoList = pokemonInfo))
@@ -47,6 +60,23 @@ class MainViewModel @Inject constructor(
                 }
             }
         )
+    }
+
+    fun getInfoDataWithFilter(keyword: String) = intent {
+        viewModelScope.launch {
+            reduce {
+                val filterList = pokemonInfo.filter { it.id.contains(keyword) || it.name.contains(keyword) }
+                state.copy(mainInfoState = MainInfoState.Info(infoList = filterList))
+            }
+        }
+    }
+
+    fun setEmptyState() = intent {
+        viewModelScope.launch {
+            reduce {
+                state.copy(mainInfoState = MainInfoState.Empty)
+            }
+        }
     }
 
     fun startDetailActivity(pokemonInfo: PokemonInfo){
