@@ -1,6 +1,5 @@
 package com.example.pokeinfo.features.main.screen.container
 
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,6 +9,8 @@ import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetManager
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetType
 import com.example.pokeinfo.core.ui.bottomSheet.layout.favorite.FavoriteInterface
+import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.Generation
+import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.GenerationInterface
 import com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBottomSheetInterface
 import com.example.pokeinfo.databinding.ActivityMainBinding
 import com.example.pokeinfo.features.detail.screen.container.DetailActivity
@@ -26,20 +27,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.viewmodel.observe
 import com.example.pokeinfo.utils.checkFolderPhone
 import com.example.pokeinfo.utils.startShimmer
-import com.example.pokeinfo.utils.stopShimmer
 import com.example.pokeinfo.utils.stopShimmerLayout
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val mainViewModel: MainViewModel by viewModels()
+    private var bottomSheet : BottomSheetManager? = null
 
-    override fun initBinding(layoutInflater: LayoutInflater): ActivityMainBinding =
-        ActivityMainBinding.inflate(layoutInflater)
-
-    override fun onInitBinding() {
-        checkFolderPhone()
-    }
+    override fun initBinding(layoutInflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+    override fun onInitBinding() { checkFolderPhone() }
 
     private fun checkFolderPhone() {
         checkFolderPhone(
@@ -90,30 +87,42 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         when (mainSideEffect) {
             // TODO: 좋아요 포켓몬 -> local DB로 변경 필요.
             is MainSideEffect.ShowFavoriteBottomSheet -> {
-                val bottomSheet = BottomSheetManager(
+                bottomSheet = BottomSheetManager(
                     currentType = BottomSheetType.FAVORITE,
                     pokemonInfoList = (binding.recyclerView.adapter as? PokemonCardAdapter)?.model?.filter { it.type.any { it.contains("Fire") } }?.let { ArrayList(it) } ?: ArrayList<PokemonInfo>(),
                     favoriteInterface = object : FavoriteInterface {
                         override fun clickItem(pokemonInfo: PokemonInfo) {
                             mainViewModel.startDetailActivity(pokemonInfo)
+                            mainViewModel.closeBottomSheet()
                         }
                     }
                 )
-                bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+                bottomSheet?.let { it.show(supportFragmentManager, it.tag) }
             }
 
             is MainSideEffect.ShowAllTypeBottomSheet -> {
-                val bottomSheet = BottomSheetManager(BottomSheetType.ALL_TYPE)
-                bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+                bottomSheet = BottomSheetManager(BottomSheetType.ALL_TYPE)
+                bottomSheet?.let { it.show(supportFragmentManager, it.tag) }
             }
 
             is MainSideEffect.ShowGenerationsBottomSheet -> {
-                val bottomSheet = BottomSheetManager(BottomSheetType.GENERATIONS)
-                bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+                bottomSheet = BottomSheetManager(
+                    currentType = BottomSheetType.GENERATIONS,
+                    generationInterface = object : GenerationInterface {
+                        override fun clickItem(generation: Generation) {
+                            mainViewModel.run {
+                                setEmptyState()
+                                getInfoDataWithGeneration(generation)
+                                closeBottomSheet()
+                            }
+                        }
+                    }
+                )
+                bottomSheet?.let { it.show(supportFragmentManager, it.tag) }
             }
 
             is MainSideEffect.ShowSearchBottomSheet -> {
-                val bottomSheet = BottomSheetManager(
+                bottomSheet = BottomSheetManager(
                     currentType = BottomSheetType.SEARCH,
                     searchBottomSheetInterface = object : SearchBottomSheetInterface {
                         override fun onFocus() { }
@@ -121,13 +130,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                         override fun onTextChanged(text: CharSequence?) {
                             val value = text.toString()
                             mainViewModel.setEmptyState()
-                            if (value.isNotEmpty()) mainViewModel.getInfoDataWithFilter(value)
+                            if (value.isNotEmpty()) mainViewModel.getInfoDataWithKeyword(value)
                             else mainViewModel.getInfoData(limit = 0, offset = 0)
                         }
-                        override fun onEnterKeyPressed() { }
+                        override fun onEnterKeyPressed() {
+                            mainViewModel.closeBottomSheet()
+                        }
                     }
                 )
-                bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+                bottomSheet?.let { it.show(supportFragmentManager, it.tag) }
             }
 
             is MainSideEffect.ShowToast -> {
@@ -136,6 +147,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             is MainSideEffect.StartDetailActivity -> {
                 DetailActivity.start(this@MainActivity, mainSideEffect.pokemonInfo)
+            }
+
+            is MainSideEffect.CloseBottomSheet -> {
+                bottomSheet?.dismiss()
             }
         }
     }

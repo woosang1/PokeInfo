@@ -1,11 +1,11 @@
 package com.example.pokeinfo.features.main.viewModel
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.PokemonInfo
 import com.example.domain.usecase.GetPokemonInfoUseCase
 import com.example.pokeinfo.core.base.BaseViewModel
+import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.Generation
 import com.example.pokeinfo.features.main.common.MainInfoState
 import com.example.pokeinfo.features.main.common.MainSideEffect
 import com.example.pokeinfo.features.main.common.MainState
@@ -44,6 +44,7 @@ class MainViewModel @Inject constructor(
             offset = offset,
             successCallBack = { pokemonInfo ->
                 Log.i("logger" , " ${pokemonInfo.toString()}")
+                Log.i("logger" , "size :  ${pokemonInfo.size}")
                 this@MainViewModel.pokemonInfo = pokemonInfo
                 viewModelScope.launch {
                     reduce {
@@ -62,10 +63,28 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    fun getInfoDataWithFilter(keyword: String) = intent {
+    fun getInfoDataWithKeyword(keyword: String) = intent {
         viewModelScope.launch {
             reduce {
                 val filterList = pokemonInfo.filter { it.id.contains(keyword) || it.name.contains(keyword) }
+                state.copy(mainInfoState = MainInfoState.Info(infoList = filterList))
+            }
+        }
+    }
+
+    fun getInfoDataWithGeneration(generation: Generation) = intent {
+        viewModelScope.launch {
+            reduce {
+                val filterList = when (generation.id) {
+                    1 -> pokemonInfo.filterIndexed { index, _ -> index in 1..151 }
+                    2 -> pokemonInfo.filterIndexed { index, _ -> index in 152..251 }
+                    3 -> pokemonInfo.filterIndexed { index, _ -> index in 252..386 }
+                    4 -> pokemonInfo.filterIndexed { index, _ -> index in 387..493 }
+                    5 -> pokemonInfo.filterIndexed { index, _ -> index in 494..649 }
+                    6 -> pokemonInfo.filterIndexed { index, _ -> index in 650..721 }
+                    7 -> pokemonInfo.filterIndexed { index, _ -> index in 722..809 }
+                    else -> emptyList()
+                }
                 state.copy(mainInfoState = MainInfoState.Info(infoList = filterList))
             }
         }
@@ -103,6 +122,10 @@ class MainViewModel @Inject constructor(
 
     fun showSearchBottomSheet(){
         postAction(MainSideEffect.ShowSearchBottomSheet)
+    }
+
+    fun closeBottomSheet(){
+        postAction(MainSideEffect.CloseBottomSheet)
     }
 
     private fun postAction(sideEffect: MainSideEffect) = intent {

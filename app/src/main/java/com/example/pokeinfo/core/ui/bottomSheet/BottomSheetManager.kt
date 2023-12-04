@@ -10,6 +10,7 @@ import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.core.ui.bottomSheet.layout.allType.AllTypeLayout
 import com.example.pokeinfo.core.ui.bottomSheet.layout.favorite.FavoriteInterface
 import com.example.pokeinfo.core.ui.bottomSheet.layout.favorite.FavoriteLayout
+import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.GenerationInterface
 import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.GenerationsLayout
 import com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBottomSheetInterface
 import com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchLayout
@@ -24,6 +25,8 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
     private var pokemonInfoList : ArrayList<PokemonInfo> = ArrayList<PokemonInfo>()
     private var favoriteInterface: FavoriteInterface? = null
     private var searchBottomSheetInterface: SearchBottomSheetInterface? = null
+    private var generationInterface: GenerationInterface? = null
+
     constructor(
         currentType: BottomSheetType
     ) : this() {
@@ -48,6 +51,14 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
         this.searchBottomSheetInterface = searchBottomSheetInterface
     }
 
+    constructor(
+        currentType: BottomSheetType,
+        generationInterface : GenerationInterface,
+    ) : this() {
+        this.currentType = currentType
+        this.generationInterface = generationInterface
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,7 +71,10 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
                 favoriteInterface = favoriteInterface
             )
             BottomSheetType.ALL_TYPE -> AllTypeLayout(context = requireContext())
-            BottomSheetType.GENERATIONS -> GenerationsLayout(context = requireContext())
+            BottomSheetType.GENERATIONS -> GenerationsLayout(
+                context = requireContext(),
+                generationInterface = generationInterface
+            )
             BottomSheetType.SEARCH -> SearchLayout(
                 context = requireContext(),
                 searchBottomSheetInterface = searchBottomSheetInterface

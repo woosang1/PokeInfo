@@ -9,20 +9,22 @@ import com.example.pokeinfo.databinding.LayoutGenerationsBottomSheetBinding
 import com.example.pokeinfo.utils.decoration.ItemGridDecorator
 import com.example.pokeinfo.utils.dpToPixel
 
-class GenerationsLayout
-constructor(context: Context, closeCallBack : (() -> Unit)? = null) : LinearLayout(context) {
+class GenerationsLayout(
+    private val context: Context,
+    private val generationInterface: GenerationInterface?
+) : LinearLayout(context) {
 
     private var binding: LayoutGenerationsBottomSheetBinding = LayoutGenerationsBottomSheetBinding.inflate(LayoutInflater.from(context), this, true)
 
     private val generationList : List<Generation> = listOf(
             Generation(id = 1, title = R.string.generation_item_1, image = R.drawable.gen1),
-            Generation(id = 1, title = R.string.generation_item_2, image = R.drawable.gen2),
-            Generation(id = 1, title = R.string.generation_item_3, image = R.drawable.gen3),
-            Generation(id = 1, title = R.string.generation_item_4, image = R.drawable.gen4),
-            Generation(id = 1, title = R.string.generation_item_5, image = R.drawable.gen5),
-            Generation(id = 1, title = R.string.generation_item_6, image = R.drawable.gen6),
-            Generation(id = 1, title = R.string.generation_item_7, image = R.drawable.gen7),
-            Generation(id = 1, title = R.string.generation_item_8, image = R.drawable.gen8)
+            Generation(id = 2, title = R.string.generation_item_2, image = R.drawable.gen2),
+            Generation(id = 3, title = R.string.generation_item_3, image = R.drawable.gen3),
+            Generation(id = 4, title = R.string.generation_item_4, image = R.drawable.gen4),
+            Generation(id = 5, title = R.string.generation_item_5, image = R.drawable.gen5),
+            Generation(id = 6, title = R.string.generation_item_6, image = R.drawable.gen6),
+            Generation(id = 7, title = R.string.generation_item_7, image = R.drawable.gen7),
+            Generation(id = 8, title = R.string.generation_item_8, image = R.drawable.gen8)
     )
 
     init {
@@ -32,7 +34,7 @@ constructor(context: Context, closeCallBack : (() -> Unit)? = null) : LinearLayo
 
     private fun setRecyclerView() {
         binding.recyclerView.apply {
-            adapter = GenerationsAdapter()
+            adapter = GenerationsAdapter(generationInterface)
             layoutManager = GridLayoutManager(context, 2)
             addItemDecoration(
                 ItemGridDecorator(
