@@ -75,15 +75,18 @@ class MainViewModel @Inject constructor(
     fun getInfoDataWithGeneration(generation: Generation) = intent {
         viewModelScope.launch {
             reduce {
-                val filterList = when (generation.id) {
-                    1 -> pokemonInfo.filterIndexed { index, _ -> index in 1..151 }
-                    2 -> pokemonInfo.filterIndexed { index, _ -> index in 152..251 }
-                    3 -> pokemonInfo.filterIndexed { index, _ -> index in 252..386 }
-                    4 -> pokemonInfo.filterIndexed { index, _ -> index in 387..493 }
-                    5 -> pokemonInfo.filterIndexed { index, _ -> index in 494..649 }
-                    6 -> pokemonInfo.filterIndexed { index, _ -> index in 650..721 }
-                    7 -> pokemonInfo.filterIndexed { index, _ -> index in 722..809 }
-                    else -> emptyList()
+                val filterList = pokemonInfo.filter {
+                    val index = pokemonInfo.indexOf(it)
+                    when (generation.id) {
+                        1 -> index in 1..150
+                        2 -> index in 151..250
+                        3 -> index in 251..385
+                        4 -> index in 386..492
+                        5 -> index in 493..648
+                        6 -> index in 649..720
+                        7 -> index in 721..809
+                        else -> false
+                    }
                 }
                 state.copy(mainInfoState = MainInfoState.Info(infoList = filterList))
             }
