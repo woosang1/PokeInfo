@@ -9,6 +9,7 @@ import com.example.pokeinfo.R
 import com.example.pokeinfo.core.base.BaseActivity
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetManager
 import com.example.pokeinfo.core.ui.bottomSheet.BottomSheetType
+import com.example.pokeinfo.core.ui.bottomSheet.layout.favorite.FavoriteInterface
 import com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBottomSheetInterface
 import com.example.pokeinfo.databinding.ActivityMainBinding
 import com.example.pokeinfo.features.detail.screen.container.DetailActivity
@@ -69,7 +70,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun render(state: MainState) {
-        Log.d("logger", "render : state ${state.toString()}")
         when (state.mainInfoState) {
             is MainInfoState.Info -> {
                 (binding.recyclerView.adapter as? PokemonCardAdapter)?.run {
@@ -88,10 +88,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun handleSideEffect(mainSideEffect: MainSideEffect) {
         when (mainSideEffect) {
+            // TODO: 좋아요 포켓몬 -> local DB로 변경 필요.
             is MainSideEffect.ShowFavoriteBottomSheet -> {
                 val bottomSheet = BottomSheetManager(
                     currentType = BottomSheetType.FAVORITE,
-                    pokemonInfoList = (binding.recyclerView.adapter as? PokemonCardAdapter)?.model ?: ArrayList<PokemonInfo>()
+                    pokemonInfoList = (binding.recyclerView.adapter as? PokemonCardAdapter)?.model?.filter { it.type.any { it.contains("Fire") } }?.let { ArrayList(it) } ?: ArrayList<PokemonInfo>(),
+                    favoriteInterface = object : FavoriteInterface {
+                        override fun clickItem(pokemonInfo: PokemonInfo) {
+                            mainViewModel.startDetailActivity(pokemonInfo)
+                        }
+                    }
                 )
                 bottomSheet.show(supportFragmentManager, bottomSheet.tag)
             }

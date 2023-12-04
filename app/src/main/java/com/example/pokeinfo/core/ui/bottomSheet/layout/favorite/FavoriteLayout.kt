@@ -10,10 +10,10 @@ import com.example.pokeinfo.features.main.screen.adater.PokemonCardAdapter
 import com.example.pokeinfo.utils.decoration.ItemGridDecorator
 import com.example.pokeinfo.utils.dpToPixel
 
-class FavoriteLayout
-constructor(context: Context,
-            private val pokemonInfoList : ArrayList<PokemonInfo>,
-            val closeCallBack : (() -> Unit)? = null) : LinearLayout(context) {
+class FavoriteLayout(private val context: Context,
+                     private val pokemonInfoList: ArrayList<PokemonInfo>,
+                     private val favoriteInterface: FavoriteInterface?
+) : LinearLayout(context) {
 
     private var binding: LayoutFavoriteBottomSheetBinding = LayoutFavoriteBottomSheetBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -24,7 +24,7 @@ constructor(context: Context,
 
     private fun setRecyclerView() {
         binding.recyclerView.apply {
-            adapter = FavoriteAdapter()
+            adapter = FavoriteAdapter(favoriteInterface)
             layoutManager = GridLayoutManager(context, 2)
             addItemDecoration(
                 ItemGridDecorator(
@@ -40,7 +40,7 @@ constructor(context: Context,
         }
     }
 
-    private fun addData(){
+    private fun addData() {
         (binding.recyclerView.adapter as? FavoriteAdapter)?.run {
             model.clear()
             addData(pokemonInfoList)

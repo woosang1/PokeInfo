@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import com.example.domain.model.PokemonInfo
 import com.example.pokeinfo.core.ui.bottomSheet.layout.allType.AllTypeLayout
+import com.example.pokeinfo.core.ui.bottomSheet.layout.favorite.FavoriteInterface
 import com.example.pokeinfo.core.ui.bottomSheet.layout.favorite.FavoriteLayout
 import com.example.pokeinfo.core.ui.bottomSheet.layout.generations.GenerationsLayout
 import com.example.pokeinfo.core.ui.bottomSheet.layout.search.SearchBottomSheetInterface
@@ -21,6 +22,7 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
 
     private var currentType: BottomSheetType = BottomSheetType.FAVORITE
     private var pokemonInfoList : ArrayList<PokemonInfo> = ArrayList<PokemonInfo>()
+    private var favoriteInterface: FavoriteInterface? = null
     private var searchBottomSheetInterface: SearchBottomSheetInterface? = null
     constructor(
         currentType: BottomSheetType
@@ -30,10 +32,12 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
 
     constructor(
         currentType: BottomSheetType,
-        pokemonInfoList : ArrayList<PokemonInfo>,
+        pokemonInfoList: ArrayList<PokemonInfo>,
+        favoriteInterface: FavoriteInterface
     ) : this() {
         this.currentType = currentType
         this.pokemonInfoList = pokemonInfoList
+        this.favoriteInterface = favoriteInterface
     }
 
     constructor(
@@ -50,7 +54,11 @@ class BottomSheetManager() : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         return when(currentType){
-            BottomSheetType.FAVORITE -> FavoriteLayout(context = requireContext(), pokemonInfoList = pokemonInfoList)
+            BottomSheetType.FAVORITE -> FavoriteLayout(
+                context = requireContext(),
+                pokemonInfoList = pokemonInfoList,
+                favoriteInterface = favoriteInterface
+            )
             BottomSheetType.ALL_TYPE -> AllTypeLayout(context = requireContext())
             BottomSheetType.GENERATIONS -> GenerationsLayout(context = requireContext())
             BottomSheetType.SEARCH -> SearchLayout(
