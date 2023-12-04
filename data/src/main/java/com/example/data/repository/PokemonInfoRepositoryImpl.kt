@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import com.example.data.datasource.PokemonInfoLocalDataSource
 import com.example.data.datasource.PokemonInfoRemoteDataSource
 import com.example.data.model.rp.RpPokemonInfo
 import com.example.domain.model.PokemonInfo
@@ -11,12 +12,11 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class PokemonInfoRepositoryImpl @Inject constructor(
-
     private val remoteDataSource: PokemonInfoRemoteDataSource,
-    private val localDataSource: PokemonInfoRemoteDataSource
-
+    private val localDataSource: PokemonInfoLocalDataSource
 ) : PokemonInfoRepository {
 
+    /** remote **/
     override fun getInfo(
         limit: Int?,
         offset: Int?,
@@ -38,4 +38,11 @@ class PokemonInfoRepositoryImpl @Inject constructor(
                 }
             })
     }
+
+
+    /** local **/
+    override fun insertLocalDB() { localDataSource.insert() }
+    override fun clearLocalDB() { localDataSource.clear() }
+    override fun deleteLocalDB(id: String) { localDataSource.deleteContent(id) }
+
 }

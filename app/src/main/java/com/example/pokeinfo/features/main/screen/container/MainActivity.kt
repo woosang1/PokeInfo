@@ -72,7 +72,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         Log.d("logger", "render : state ${state.toString()}")
         when (state.mainInfoState) {
             is MainInfoState.Info -> {
-                (binding.recyclerView.adapter as? PokemonCardAdapter)?.addData(state.mainInfoState.infoList)
+                (binding.recyclerView.adapter as? PokemonCardAdapter)?.run {
+                    model.clear()
+                    addData(ArrayList(state.mainInfoState.infoList))
+                }
                 stopShimmerLayout(shimmerLayout = binding.shimmerLayout.getShimmerLayout(), contentLayout = binding.recyclerView)
             }
 
@@ -88,7 +91,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             is MainSideEffect.ShowFavoriteBottomSheet -> {
                 val bottomSheet = BottomSheetManager(
                     currentType = BottomSheetType.FAVORITE,
-                    pokemonInfoList = (binding.recyclerView.adapter as? PokemonCardAdapter)?.getModel() ?: ArrayList<PokemonInfo>()
+                    pokemonInfoList = (binding.recyclerView.adapter as? PokemonCardAdapter)?.model ?: ArrayList<PokemonInfo>()
                 )
                 bottomSheet.show(supportFragmentManager, bottomSheet.tag)
             }
