@@ -3,25 +3,16 @@ package com.example.pokeinfo.core.ui.bottomSheet.layout.generations
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokeinfo.core.base.BaseRecyclerAdapter
 import com.example.pokeinfo.databinding.LayoutGenerationsItemBinding
 
-class GenerationsAdapter() : RecyclerView.Adapter<GenerationsItemViewHolder>() {
-
-    private val model : ArrayList<Generation> = ArrayList<Generation>()
+class GenerationsAdapter() : BaseRecyclerAdapter<Generation>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenerationsItemViewHolder {
         return GenerationsItemViewHolder(binding = LayoutGenerationsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),)
     }
 
-    override fun getItemCount(): Int = model.size
-
-    override fun onBindViewHolder(holder: GenerationsItemViewHolder, position: Int) {
-        holder.onBind(model[position])
+    override fun onBindViewHolder(defaultViewHolder: RecyclerView.ViewHolder, position: Int) {
+        (defaultViewHolder as? GenerationsItemViewHolder)?.onBind(model[position])
     }
-
-    fun setData(list: List<Generation>){
-        model.clear()
-        model.addAll(list)
-    }
-
 }

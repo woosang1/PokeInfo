@@ -49,7 +49,10 @@ constructor(context: Context, closeCallBack : (() -> Unit)? = null) : LinearLayo
     }
 
     private fun setData(){
-        (binding.recyclerView.adapter as? GenerationsAdapter)?.setData(generationList)
+        (binding.recyclerView.adapter as? GenerationsAdapter)?.run {
+            model.clear()
+            addData(ArrayList(generationList))
+        }
     }
 
 }

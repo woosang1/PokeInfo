@@ -31,7 +31,6 @@ class DetailActivity  : BaseActivity<ActivityDetailBinding>() {
     companion object {
         private const val POKE_INFO: String = "pokeInfo"
         fun start(context: Context, pokemonInfo: PokemonInfo){
-            Log.d("logger" , "DetailActivity - start")
             Intent(
                 context, DetailActivity::class.java
             ).apply {

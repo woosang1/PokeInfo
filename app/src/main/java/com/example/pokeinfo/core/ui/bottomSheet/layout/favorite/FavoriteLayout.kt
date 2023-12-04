@@ -41,7 +41,10 @@ constructor(context: Context,
     }
 
     private fun addData(){
-        (binding.recyclerView.adapter as? FavoriteAdapter)?.addData(pokemonInfoList)
+        (binding.recyclerView.adapter as? FavoriteAdapter)?.run {
+            model.clear()
+            addData(pokemonInfoList)
+        }
     }
 
 }
