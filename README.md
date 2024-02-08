@@ -1,7 +1,8 @@
-# PokeInfo
+<h1 align="center">PokeInfo</h1>
 
-## 포켓몬 도감 앱
-- **PokeDex** 앱 참고하여 만든 앱 
+<p>
+🗡️ (포켓몬 도감 앱) PokeDex 앱 참고하여 만든 앱 
+</p>
 
 ## 아키텍처
 MVI (오르빗) / Clean-Architecture(멀티모듈)
